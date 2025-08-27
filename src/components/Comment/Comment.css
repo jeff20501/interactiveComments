@@ -1,0 +1,151 @@
+.commentSec{
+    background-color: var(--buttonColor);
+    border-radius: 20px;
+}
+
+.firstLevel section{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    color: var(--buttonBg);
+    font-weight: 600;
+    background-color: var(--commentBg);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+aside button{
+    border: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.firstLevel section section{
+    display: block;
+}
+
+.firstLevel section section img{
+    max-inline-size: 40px;
+}
+
+.firstLevel section section section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.firstLevel section section .content{
+    display: block;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.you{
+    background-color: var(--buttonBg);
+    color: var(--buttonColor);
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.username{
+    color: var(--userColor);
+    font-weight: 600;
+}
+
+.actions{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.reply button{
+    display: flex;
+    align-items: center;
+    color: var(--buttonBg);
+    font-weight: 600;
+    cursor: pointer;
+    fill: var(--buttonBg);
+}
+
+.reply button:hover{
+    color: var(--buttonHover);
+    fill: var(--buttonHover);
+}
+
+
+
+.delete button{
+    display: flex;
+    align-items: center;
+    color: var(--deleteBg);
+    font-weight: 600;
+    cursor: pointer;
+    fill: var(--deleteBg);
+}
+
+.delete button:hover{
+    color: var(--deleteHover);
+    fill: var(--deleteHover);
+}
+
+.edit button{
+    display: flex;
+    align-items: center;
+    color: var(--buttonBg);
+    fill: var(--buttonBg);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit button:hover{
+    color: var(--buttonHover);
+    fill: var(--buttonHover);
+}
+
+.replyTo{
+    color: var(--buttonBg);
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.replies{
+    transform: translateX(8%);
+    max-inline-size: 900px;
+    background-color: var(--commentBg);
+    margin-bottom: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.replies::before{
+    position: absolute;
+    content: '';
+    background-color: var(--commentBg);
+    height: 100%;
+    width: 5px;
+    left: -30px;
+    border-radius: 10px;
+}
+
+.replies aside{
+    background-color: var(--buttonColor);
+}
+
+.replies img{
+    max-inline-size: 40px;
+}

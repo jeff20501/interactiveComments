@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /*fonts*/
+    --fontFamily: 'Rubik', sans-serif;
+    --fontSize:1.2rem;
+    /*colors*/
+    --buttonBg:hsl(238, 40%, 52%);
+    --userColor:hsl(212, 24%, 26%);
+    --userComment:hsl(211, 10%, 45%);
+    --buttonColor:hsl(0, 100%, 100%);
+    --commentBg:hsl(228, 33%, 97%);
+    --bodyBg:hsl(223, 19%, 93%);
+    --deleteBg:hsl(358, 79%, 66%);
+    --deleteHover:hsl(357, 100%, 86%);
+    --buttonHover:hsl(239, 57%, 85%);
+}
+
+body{
+    font-family: var(--fontFamily);
+    color: var(--userComment);
+    font-size: var(--fontSize);
+    background-color: var(--bodyBg);
+}
+
+img{
+    display: block;
+    max-inline-size: 100%;
+}
+
+svg{
+    width:30px;
+    height: 20px;
+}
+
+.wrapper{
+    max-inline-size: 1000px;
+    margin: 0 auto;
+    line-height: 30px;
+    display: grid;
+    gap: 20px;
+}
+
+button{
+    border: none;
+    font-family: var(--fontFamily);
+    font-size: var(--fontSize);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+}

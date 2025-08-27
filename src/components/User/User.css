@@ -1,0 +1,50 @@
+.userActions{
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    margin-block: 20px;
+    background-color: var(--buttonColor);
+    padding: 20px;
+    border-radius: 20px;
+
+}
+
+label{
+    display: none;
+}
+
+textarea{
+    resize: none;
+    width: 100%;
+    height: 150px;
+    border: 2px var(--commentBg) solid;
+    padding: 20px;
+    font-family: var(--fontFamily);
+    font-size: var(--fontSize);
+    color: var(--userComments);
+    font-weight: 550;
+    cursor: pointer;
+}
+
+textarea:focus{
+    border: 1px var(--buttonBg) solid;
+}
+
+.userActions button{
+    background-color: var(--buttonBg);
+    color: var(--buttonColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.userActions button:hover{
+    background-color: var(--buttonHover);
+}
+
+.userActions img{
+    max-inline-size: 40px;
+}
