@@ -8,7 +8,7 @@
 :root{
     /*fonts*/
     --fontFamily: 'Rubik', sans-serif;
-    --fontSize:1.2rem;
+    --fontSize:1.1rem;
     /*colors*/
     --buttonBg:hsl(238, 40%, 52%);
     --userColor:hsl(212, 24%, 26%);
@@ -54,4 +54,5 @@ button{
     align-items: center;
     justify-content: center;
     background-color: inherit;
+    cursor: pointer;
 }

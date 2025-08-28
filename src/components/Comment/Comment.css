@@ -1,6 +1,7 @@
 .commentSec{
     background-color: var(--buttonColor);
     border-radius: 20px;
+    position: relative;
 }
 
 .firstLevel section{
@@ -9,7 +10,7 @@
     align-items: center;
 }
 
-aside{
+aside{ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,8 +125,8 @@ aside button{
 }
 
 .replies{
-    transform: translateX(8%);
-    max-inline-size: 900px;
+    transform: translateX(20%);
+    max-inline-size: 750px;
     background-color: var(--commentBg);
     margin-bottom: 20px;
     border-radius: 20px;
@@ -138,7 +139,7 @@ aside button{
     background-color: var(--commentBg);
     height: 100%;
     width: 5px;
-    left: -30px;
+    left: -50px;
     border-radius: 10px;
 }
 
@@ -148,4 +149,54 @@ aside button{
 
 .replies img{
     max-inline-size: 40px;
+}
+
+.deleteWindow{
+    display: block;
+    position: fixed;
+    z-index: 3;
+    max-inline-size: 400px;
+    background-color: var(--buttonColor);
+    border-radius: 20px;
+    transition: all .5s ease-in-out;
+}
+
+.deleteWindow div{
+    display: flex;
+    justify-content: space-between;
+    margin-block: 15px;
+}
+
+.deleteWindow div button:nth-child(1){
+    color: var(--buttonColor);
+    background-color: var(--userComment);
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.deleteWindow div button:hover:nth-child(2){
+    background-color: var(--deleteHover);
+}
+
+.deleteWindow div button:nth-child(2){
+    color: var(--buttonColor);
+    background-color: var(--deleteBg);
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.overlay{
+    position: fixed;
+    inset: 0;
+    transition: opacity .5s ease-in-out;
+    filter: brightness(.6);
+    z-index: -2;
+    opacity: 0;
+    background-color: hsla(0, 0%, 0%, 0.512);
+}
+
+.overlay.shown{
+    opacity: 1;
 }
