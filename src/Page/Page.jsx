@@ -60,6 +60,29 @@ export function Page(){
         }).filter(Boolean)) //remove false values
     }
 
+    const upVote=(comId, replyId=null)=>{
+        setComments(prevComment=>prevComment.map((comment)=>{
+            if(replyId===null){ //look if we are upvote a reply or comment
+                if(comId===comment.id){ //upvote a comment
+                    return{
+                        ...comment,
+                        score:comment.score+1
+                    }                    
+                }
+                return comment
+            }
+            if(comId===comment.id){ //upvote reply in a comment
+                return{
+                    ...comment,
+                    replies:comment.replies.map(reply=>(
+                        reply.id===replyId?{...reply, score:reply.score+1}:reply
+                    ))
+                }
+            }
+            return comment
+        }))
+    }
+
     //array
     const commentData = comments?.map((data)=>{ //only look when data comments exists with optional chaining
         return(
@@ -72,6 +95,7 @@ export function Page(){
                 deleteWindow={deleteWindow}
                 shownWindow={shownWindow}
                 deleteComment={deleteComment}
+                upVote={upVote}
             />
         )
         

@@ -31,10 +31,12 @@ export function Comment(props){
                 ))
             }
 
-            <section className='firstLevel'>
+            <section key={props.data.id} className='firstLevel'>
                 <section>
                     <aside>
-                        <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                        <button
+                            onClick={()=>props.upVote(props.data.id)}
+                        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                         <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/></svg>
                         </button>                        
                         {props.data.score}                        
@@ -46,7 +48,7 @@ export function Comment(props){
                     <section>
                         <section>
                              <div className='profile'>
-                                <img src={props.data.user.image.png} alt='avatar image'/>
+                                <img src={props.data?.user?.image?.png} alt='avatar image'/>
                                 <p className='username'>{props.data.user.username}</p>
                                 <p className='time'>{props.data.createdAt}</p>
                             </div>
@@ -55,18 +57,19 @@ export function Comment(props){
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                                     <path d="M268.2 82.4C280.2 87.4 288 99 288 112L288 192L400 192C497.2 192 576 270.8 576 368C576 481.3 494.5 531.9 475.8 542.1C473.3 543.5 470.5 544 467.7 544C456.8 544 448 535.1 448 524.3C448 516.8 452.3 509.9 457.8 504.8C467.2 496 480 478.4 480 448.1C480 395.1 437 352.1 384 352.1L288 352.1L288 432.1C288 445 280.2 456.7 268.2 461.7C256.2 466.7 242.5 463.9 233.3 454.8L73.3 294.8C60.8 282.3 60.8 262 73.3 249.5L233.3 89.5C242.5 80.3 256.2 77.6 268.2 82.6z"/></svg>
                                     Reply
-                                </button>
-                                
+                                </button>                                
                             </div>
                         </section>                       
                         <p className='content'>{props.data.content}</p>
                     </section>                    
                 </section>      
                     {props.data.replies&&props.data.replies.length>0?                        
-                        props.data.replies.map((reply)=>(
+                        props.data?.replies.map((reply)=>(
                         <section key={reply.id} className='replies'>
                             <aside>
-                                <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                <button
+                                    onClick={()=>props.upVote(props.data.id, reply.id)}
+                                ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                                     <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/></svg>
                                 </button>{props.data.score}
                                 <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
