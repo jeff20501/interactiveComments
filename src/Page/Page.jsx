@@ -25,13 +25,18 @@ export function Page(){
             fetchData()        
     }, [])
 
+    useEffect(()=>{
+        document.body.style.overflow=deleteWindow?"hidden":"auto"
+    })
+
     //function
     const overlay=clsx('overlay',
         deleteWindow?"shown":null
     )
 
-    console.log(overlay)
-    console.log(deleteWindow)
+    const shownWindow=clsx('deleteWindow',
+        deleteWindow?'shown':null
+    )
 
     const windowDelete=()=>{
         setDeleteWindow(prevState=>!prevState)
@@ -65,6 +70,7 @@ export function Page(){
                 username={user.username}
                 windowDelete={windowDelete}
                 deleteWindow={deleteWindow}
+                shownWindow={shownWindow}
                 deleteComment={deleteComment}
             />
         )

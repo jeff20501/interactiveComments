@@ -1,9 +1,36 @@
-import minusIcon from '../../assets/images/icon-minus.svg'
-import plusIcon from '../../assets/images/icon-plus.svg'
 import './Comment.css'
 export function Comment(props){
+    const mappedReply=props.data?.replies?.map((reply)=>{
+            return{
+                id:reply.id,
+                replyUsername:reply.user.username,
+                createdAt:reply.createdAt
+            }
+        }
+    ) 
+
     return(  
         <article className='commentSec'>
+            {props.deleteWindow&&mappedReply.map((reply)=>(                           
+                <section className={props.shownWindow} key={reply.id}>
+                    <p className='username'>Delete Comment</p>
+                    <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+                    <div>
+                        <button
+                            onClick={()=>props.windowDelete()}
+                        >No,Cancel</button>
+                        <button
+                            onClick={()=>{
+                                props.windowDelete()
+                                props.deleteComment(props.data.id, reply.id)
+                            }}
+                        >Yes,Delete</button>
+                    </div>
+                </section>
+                    
+                ))
+            }
+
             <section className='firstLevel'>
                 <section>
                     <aside>
@@ -38,7 +65,14 @@ export function Comment(props){
                     {props.data.replies&&props.data.replies.length>0?                        
                         props.data.replies.map((reply)=>(
                         <section key={reply.id} className='replies'>
-                            <aside><button><img src={plusIcon} alt='add icon'/></button>{props.data.score}<button><img src={minusIcon} alt='minus icon'/></button></aside>  
+                            <aside>
+                                <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                    <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/></svg>
+                                </button>{props.data.score}
+                                <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                    <path d="M96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320z"/></svg>
+                                </button>
+                            </aside>  
                             <section>
                                 <section>
                                     <div className='profile'>
@@ -81,7 +115,7 @@ export function Comment(props){
                                     </div>                                    
                                 </section>                       
                                 <p className='content'><span className='replyTo'>@{reply.replyingTo}</span>{reply.content}</p>
-                            </section>          
+                            </section>           
                         </section>        
                     ))                
                 :null}
