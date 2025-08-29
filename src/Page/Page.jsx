@@ -69,7 +69,7 @@ export function Page(){
     }
 
     console.log(comments)
-    const deleteComment=(comid, replyId=null)=>{
+    const deleteComment=(comid, replyId=null)=>{  //deleteComment(comment.id, null) deleteComment(comment.id, reply.id)
         setComments(prevComment=>prevComment.map((comment)=>{
             if(replyId===null){ //remove top level comments
                 if(comid===comment.id){
