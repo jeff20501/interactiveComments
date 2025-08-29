@@ -1,4 +1,5 @@
 import './Comment.css'
+import { formatDistanceToNow } from "date-fns";
 export function Comment(props){
     const mappedReply=props.data?.replies?.map((reply)=>{
             return{
@@ -44,15 +45,16 @@ export function Comment(props){
                             onClick={()=>props.downVote(props.data.id, null)}
                         ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                         <path d="M96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320z"/></svg>
-                        </button>
-                    
+                        </button>                    
                     </aside>
+                    
                     <section>
                         <section>
                              <div className='profile'>
                                 <img src={props.data?.user?.image?.png} alt='avatar image'/>
                                 <p className='username'>{props.data.user.username}</p>
-                                <p className='time'>{props.data.createdAt}</p>
+                                {props.username===props.data.user.username?<p className='you'>you</p>:null}
+                                <p className='time'>{formatDistanceToNow(new Date(props.data.createdAt), { addSuffix: true })}</p>
                             </div>
                             <div className='reply'>
                                 <button>
@@ -86,7 +88,7 @@ export function Comment(props){
                                         <img src={reply.user.image.png} alt='avatar image'/>
                                         <p className='username'>{reply.user.username}</p>
                                         {props.username===reply.user.username?<p className='you'>you</p>:null}
-                                        <p className='time'>{reply.createdAt}</p>
+                                        <p className='time'>{formatDistanceToNow(new Date(reply.createdAt), {addSuffix:true})}</p>
                                     </div>
 
                                     <div className='actions'>

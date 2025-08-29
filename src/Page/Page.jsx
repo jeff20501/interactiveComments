@@ -3,6 +3,7 @@ import { Comment } from '../components/Comment/Comment'
 import {User} from '../components/User/User'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
+import { nanoid } from 'nanoid'
 export function Page(){
     //states
     const [comments, setComments]=useState([]) 
@@ -13,17 +14,17 @@ export function Page(){
     
     //fetch data
     useEffect(()=>{        
-            const fetchData =async()=>{
-                try{
-                    const res = await fetch('/data.json')
-                    const comments = await res.json()
-                    setComments(comments.comments)
-                    setUser(comments.currentUser)
-                }catch(error){
-                    console.error(error)
-                }
+        const fetchData =async()=>{
+            try{
+                const res = await fetch('/data.json')
+                const comments = await res.json()
+                setComments(comments.comments)
+                setUser(comments.currentUser)
+            }catch(error){
+                console.error(error)
             }
-            fetchData()        
+        }
+        fetchData()        
     }, [])
 
     useEffect(()=>{
@@ -43,6 +44,31 @@ export function Page(){
         setDeleteWindow(prevState=>!prevState)
     }
 
+    const addComment=(formData)=>{
+        console.log("comment")
+        const newContent = formData.get('comment')
+        if(!newContent.trim()){
+            return//ignore empty comments
+        }
+        //else do this
+        const userComment={
+            id:nanoid(), 
+            content:newContent, 
+            createdAt:new Date().toISOString(), 
+            replies:[], 
+            score:0, 
+            user:{
+                image:{
+                    png:user?.image?.png,
+                    webp:user?.image?.webp
+                },
+                username:user?.username
+            }
+        }
+        setComments(prev=>[...prev, userComment]) //the comment to comments
+    }
+
+    console.log(comments)
     const deleteComment=(comid, replyId=null)=>{
         setComments(prevComment=>prevComment.map((comment)=>{
             if(replyId===null){ //remove top level comments
@@ -153,6 +179,7 @@ export function Page(){
                 {commentData}
                 <User
                     image={user?.image?.png}
+                    addComment={addComment}
                 />
                 <div className={overlay}></div>  
             </article>
