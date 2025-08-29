@@ -183,14 +183,10 @@ aside button:hover{
 
 .deleteWindow div button:nth-child(1){
     color: var(--buttonColor);
-    background-color: var(--userComment);
+    background-color: var(--userColor);
     padding: 15px;
     border-radius: 10px;
     font-weight: 600;
-}
-
-.deleteWindow div button:hover:nth-child(2){
-    background-color: var(--deleteHover);
 }
 
 .deleteWindow div button:nth-child(2){
@@ -199,6 +195,14 @@ aside button:hover{
     padding: 15px;
     border-radius: 10px;
     font-weight: 600;
+}
+
+.deleteWindow div button:hover:nth-child(1){
+    background-color: var(--userComment);
+}
+
+.deleteWindow div button:hover:nth-child(2){
+    background-color: var(--deleteHover);
 }
 
 .overlay{

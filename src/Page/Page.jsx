@@ -8,10 +8,11 @@ export function Page(){
     const [comments, setComments]=useState([]) 
     const [user, setUser] = useState({})
     const [deleteWindow, setDeleteWindow]=useState(false)
+    const [upVoted, setUpVoted] = useState(new Set())
+    const [downVoted, setDownVoted] = useState(new Set())
     
     //fetch data
-    useEffect(()=>{ 
-        
+    useEffect(()=>{        
             const fetchData =async()=>{
                 try{
                     const res = await fetch('/data.json')
@@ -61,26 +62,68 @@ export function Page(){
     }
 
     const upVote=(comId, replyId=null)=>{
+        const key = replyId?`reply-${replyId}`:`com-${comId}`
+        //if upvoted has the key do nothing
+        if(upVoted.has(key)) {
+            return
+        }
+        //else do this
         setComments(prevComment=>prevComment.map((comment)=>{
             if(replyId===null){ //look if we are upvote a reply or comment
                 if(comId===comment.id){ //upvote a comment
                     return{
                         ...comment,
-                        score:comment.score+1
-                    }                    
+                        score:comment.score+1,
+                        upVote:true
+                    }
+                                    
                 }
-                return comment
+                return comment            
             }
+        
             if(comId===comment.id){ //upvote reply in a comment
                 return{
                     ...comment,
                     replies:comment.replies.map(reply=>(
-                        reply.id===replyId?{...reply, score:reply.score+1}:reply
+                        reply.id===replyId?{...reply, score:reply.score+1, upvote:true}:reply
+                    ))
+                }
+            }       
+            return comment
+        }))
+        //now track the keys and update if needed
+        setUpVoted(preVoted=>new Set(preVoted).add(key))
+    }
+
+    const downVote=(comId, replyId)=>{
+        const key=replyId?`downreply-${replyId}`:`downcom-${comId}`
+        //if upvoted has the key do nothing
+        if(downVoted.has(key)) {
+            return
+        }
+
+        //else do this
+        setComments(prevComment=>prevComment.map((comment)=>{
+            if(replyId===null){
+                if(comId===comment.id){
+                    return{
+                        ...comment,
+                        score:comment.score-1
+                    }
+                }
+                return comment
+            }
+            if(comId===comment.id){
+                return{
+                    ...comment,
+                    replies:comment.replies.map(reply=>(
+                        reply.id===replyId?{...reply, score:reply.score-1}:reply
                     ))
                 }
             }
             return comment
         }))
+        setDownVoted(preVoted=>new Set(preVoted).add(key))
     }
 
     //array
@@ -96,6 +139,7 @@ export function Page(){
                 shownWindow={shownWindow}
                 deleteComment={deleteComment}
                 upVote={upVote}
+                downVote={downVote}
             />
         )
         
